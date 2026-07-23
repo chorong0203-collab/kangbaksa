@@ -26,7 +26,7 @@
 
   html, body{
     width:100%; height:100%;
-    font-family: "Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
     background: var(--bg);
     color: var(--text-main);
     overflow-x:hidden;
@@ -250,7 +250,11 @@
     flex-direction:column;
     gap:8px;
   }
-  .apt-card .thumb .icon{ font-size: 40px; opacity:.6; }
+  /* 이모지 대신 SVG 아이콘 사용 (iOS 등 일부 환경에서 이모지 미표시 문제 방지) */
+  .apt-card .thumb .icon-svg{ width:40px; height:40px; color:#a9b0bd; }
+  .winner-card .thumb .icon-svg{ width:56px; height:56px; color:var(--gold); }
+  .trophy .icon-svg{ width:64px; height:64px; }
+  .medal-svg{ width:28px; height:28px; display:block; }
 
   .apt-card .info{
     padding: 18px 16px 22px;
@@ -304,7 +308,8 @@
     padding-top: 4vh;
   }
   .trophy{
-    font-size: 64px;
+    display:flex;
+    justify-content:center;
     animation: trophyPop .6s cubic-bezier(.34,1.56,.64,1);
   }
   @keyframes trophyPop{
@@ -373,9 +378,11 @@
     text-align:left;
   }
   .rank-item .medal{
-    font-size: 22px;
     width: 32px;
-    text-align:center;
+    flex: 0 0 auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
   }
   .rank-item .rank-info{ display:flex; flex-direction:column; gap:2px; }
   .rank-item .rank-info .name{ font-weight:800; font-size:15px; }
@@ -446,7 +453,7 @@
     <div class="vs-area" id="vs-area">
       <!-- 좌측 카드 -->
       <div class="apt-card" id="card-left" data-side="left">
-        <div class="thumb"><span class="icon">🏢</span><span>이미지 준비중</span></div>
+        <div class="thumb"><span class="icon"><svg class="icon-svg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="4" width="28" height="40" rx="2" fill="currentColor" opacity="0.4"/><rect x="15" y="10" width="6" height="6" fill="#fff"/><rect x="27" y="10" width="6" height="6" fill="#fff"/><rect x="15" y="20" width="6" height="6" fill="#fff"/><rect x="27" y="20" width="6" height="6" fill="#fff"/><rect x="15" y="30" width="6" height="6" fill="#fff"/><rect x="27" y="30" width="6" height="6" fill="#fff"/></svg></span><span>이미지 준비중</span></div>
         <div class="info">
           <span class="region-tag" id="left-region">지역</span>
           <span class="apt-name" id="left-name">단지명</span>
@@ -457,7 +464,7 @@
 
       <!-- 우측 카드 -->
       <div class="apt-card" id="card-right" data-side="right">
-        <div class="thumb"><span class="icon">🏢</span><span>이미지 준비중</span></div>
+        <div class="thumb"><span class="icon"><svg class="icon-svg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="4" width="28" height="40" rx="2" fill="currentColor" opacity="0.4"/><rect x="15" y="10" width="6" height="6" fill="#fff"/><rect x="27" y="10" width="6" height="6" fill="#fff"/><rect x="15" y="20" width="6" height="6" fill="#fff"/><rect x="27" y="20" width="6" height="6" fill="#fff"/><rect x="15" y="30" width="6" height="6" fill="#fff"/><rect x="27" y="30" width="6" height="6" fill="#fff"/></svg></span><span>이미지 준비중</span></div>
         <div class="info">
           <span class="region-tag" id="right-region">지역</span>
           <span class="apt-name" id="right-name">단지명</span>
@@ -470,13 +477,22 @@
        화면 3) 결과 화면
        ========================================================= -->
   <section id="result-screen" class="screen">
-    <div class="trophy">🏆</div>
+    <div class="trophy">
+    <svg class="icon-svg" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 8h24v6a12 12 0 0 1-24 0V8z" fill="#c9a227"/>
+      <path d="M18 10H8a2 2 0 0 0-2 2v2a12 12 0 0 0 12 12" fill="none" stroke="#c9a227" stroke-width="3" stroke-linecap="round"/>
+      <path d="M46 10h10a2 2 0 0 1 2 2v2a12 12 0 0 1-12 12" fill="none" stroke="#c9a227" stroke-width="3" stroke-linecap="round"/>
+      <rect x="28" y="26" width="8" height="12" fill="#c9a227"/>
+      <rect x="20" y="38" width="24" height="6" rx="2" fill="#c9a227"/>
+      <rect x="16" y="44" width="32" height="6" rx="2" fill="#c9a227"/>
+    </svg>
+  </div>
     <p class="sub-copy">당신의 최애 단지는</p>
     <div class="winner-name" id="winner-name-text">-</div>
     <p class="sub-copy">입니다.</p>
 
     <div class="winner-card">
-      <div class="thumb">🏢</div>
+      <div class="thumb"><svg class="icon-svg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="4" width="28" height="40" rx="2" fill="currentColor" opacity="0.4"/><rect x="15" y="10" width="6" height="6" fill="#fff"/><rect x="27" y="10" width="6" height="6" fill="#fff"/><rect x="15" y="20" width="6" height="6" fill="#fff"/><rect x="27" y="20" width="6" height="6" fill="#fff"/><rect x="15" y="30" width="6" height="6" fill="#fff"/><rect x="27" y="30" width="6" height="6" fill="#fff"/></svg></div>
       <div class="info">
         <span class="region-tag" id="winner-region">지역</span>
       </div>
@@ -755,7 +771,7 @@ function showByeBanner(winner) {
 function restoreVsAreaMarkup() {
   el.vsArea.innerHTML = `
     <div class="apt-card" id="card-left" data-side="left">
-      <div class="thumb"><span class="icon">🏢</span><span>이미지 준비중</span></div>
+      <div class="thumb"><span class="icon"><svg class="icon-svg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="4" width="28" height="40" rx="2" fill="currentColor" opacity="0.4"/><rect x="15" y="10" width="6" height="6" fill="#fff"/><rect x="27" y="10" width="6" height="6" fill="#fff"/><rect x="15" y="20" width="6" height="6" fill="#fff"/><rect x="27" y="20" width="6" height="6" fill="#fff"/><rect x="15" y="30" width="6" height="6" fill="#fff"/><rect x="27" y="30" width="6" height="6" fill="#fff"/></svg></span><span>이미지 준비중</span></div>
       <div class="info">
         <span class="region-tag" id="left-region">지역</span>
         <span class="apt-name" id="left-name">단지명</span>
@@ -763,7 +779,7 @@ function restoreVsAreaMarkup() {
     </div>
     <div class="vs-badge">VS</div>
     <div class="apt-card" id="card-right" data-side="right">
-      <div class="thumb"><span class="icon">🏢</span><span>이미지 준비중</span></div>
+      <div class="thumb"><span class="icon"><svg class="icon-svg" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="4" width="28" height="40" rx="2" fill="currentColor" opacity="0.4"/><rect x="15" y="10" width="6" height="6" fill="#fff"/><rect x="27" y="10" width="6" height="6" fill="#fff"/><rect x="15" y="20" width="6" height="6" fill="#fff"/><rect x="27" y="20" width="6" height="6" fill="#fff"/><rect x="15" y="30" width="6" height="6" fill="#fff"/><rect x="27" y="30" width="6" height="6" fill="#fff"/></svg></span><span>이미지 준비중</span></div>
       <div class="info">
         <span class="region-tag" id="right-region">지역</span>
         <span class="apt-name" id="right-name">단지명</span>
@@ -849,26 +865,36 @@ function renderResult() {
   rankingList.innerHTML = "";
 
   const rankData = [
-    { medal: "🥇", label: "1위", item: champion },
-    { medal: "🥈", label: "2위", item: Tournament.finalLoser },
+    { rank: 1, color: "#d4af37", label: "1위", item: champion },
+    { rank: 2, color: "#a7abb3", label: "2위", item: Tournament.finalLoser },
   ];
 
   rankData.forEach(r => {
     if (!r.item) return;
-    rankingList.appendChild(buildRankItem(r.medal, r.label, r.item));
+    rankingList.appendChild(buildRankItem(r.rank, r.color, r.label, r.item));
   });
 
   // 공동 3위 (4강 패자 2명)
   Tournament.semifinalLosers.forEach(loser => {
-    rankingList.appendChild(buildRankItem("🥉", "공동 3위", loser));
+    rankingList.appendChild(buildRankItem(3, "#b08d57", "공동 3위", loser));
   });
 }
 
-function buildRankItem(medal, label, item) {
+// 순위 뱃지를 SVG로 직접 그린다 (이모지 메달 대신 사용 -> iOS 등 환경 호환성 확보)
+function medalSVG(rank, colorHex) {
+  return `
+    <svg class="medal-svg" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="20" cy="20" r="18" fill="${colorHex}"/>
+      <circle cx="20" cy="20" r="18" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+      <text x="20" y="27" font-size="17" font-weight="800" text-anchor="middle" fill="#ffffff" font-family="sans-serif">${rank}</text>
+    </svg>`;
+}
+
+function buildRankItem(rank, color, label, item) {
   const wrap = document.createElement("div");
   wrap.className = "rank-item";
   wrap.innerHTML = `
-    <span class="medal">${medal}</span>
+    <span class="medal">${medalSVG(rank, color)}</span>
     <div class="rank-info">
       <span class="name">${label} · ${item.name}</span>
       <span class="region">${item.region}</span>
